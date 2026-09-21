@@ -63,7 +63,9 @@ export function EditJsonPanel({
       if (typeof value !== "object" || value === null || Array.isArray(value)) {
         throw new Error("A survey definition is a JSON object.")
       }
-      const result = lintSurvey(value, { suppress: autofillSuppressions(value) })
+      const result = lintSurvey(value, {
+        suppress: autofillSuppressions(value),
+      })
       new Model(value) // dry run: throws here rather than in the rendered form
       onApply(value)
       setError(null)
@@ -84,14 +86,16 @@ export function EditJsonPanel({
 
   return (
     <Collapsible className="flex flex-col gap-2">
-      <CollapsibleTrigger render={<Button variant="outline" className="self-start" />}>
+      <CollapsibleTrigger
+        render={<Button variant="outline" className="self-start" />}
+      >
         Edit JSON
       </CollapsibleTrigger>
       <CollapsibleContent className="flex flex-col gap-2">
         <Textarea
           aria-label="Survey JSON"
           spellCheck={false}
-          className="h-96 font-mono text-xs [field-sizing:fixed] md:text-xs"
+          className="[field-sizing:fixed] h-96 font-mono text-xs md:text-xs"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />

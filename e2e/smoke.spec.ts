@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test"
 
-test("form renders, pages, re-themes and takes an edited definition", async ({ page }) => {
+test("form renders, pages, re-themes and takes an edited definition", async ({
+  page,
+}) => {
   await page.goto("/")
 
   const email = page.getByRole("textbox", { name: "Email address" })
