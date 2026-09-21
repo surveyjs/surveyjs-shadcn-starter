@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "surveyjs",
+  "homepage": "https://shadcn.demos.surveyjs.io",
+  "items": [
+    {
+      "name": "survey-form",
+      "type": "registry:block",
+      "title": "SurveyJS form",
+      "description": "A multi-step form rendered by SurveyJS from survey.json and themed by your shadcn tokens.",
+      "dependencies": ["survey-core", "survey-react-ui"],
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/survey-form.tsx", "type": "registry:component" },
+        { "path": "survey.json", "type": "registry:file", "target": "survey.json" }
+      ]
+    }
+  ]
+}

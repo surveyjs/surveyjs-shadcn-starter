@@ -1,0 +1,45 @@
+# Dependency policy: a starter people clone installs what was tested — package-lock.json
+# is kept in the repo and package.json uses caret ranges. The weekly scheduled run
+# installs today's survey-core / survey-react-ui on top, without saving, as an alarm
+# for upstream breakage. It persists nothing: no commit, push or PR from CI. Moving the
+# lockfile forward is Renovate's or Dependabot's job, through a reviewed pull request.
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Use the latest SurveyJS (weekly run only)
+        if: github.event_name == 'schedule'
+        run: npm install --no-save survey-core@latest survey-react-ui@latest
+      - run: npm run build
+
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Use the latest SurveyJS (weekly run only)
+        if: github.event_name == 'schedule'
+        run: npm install --no-save survey-core@latest survey-react-ui@latest
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e

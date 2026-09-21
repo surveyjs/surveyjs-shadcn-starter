@@ -1,0 +1,299 @@
+{
+  "title": "Checkout",
+  "description": "Complete your order in a few quick steps.",
+  "showTOC": true,
+  "showQuestionNumbers": "off",
+  "widthMode": "responsive",
+  "questionErrorLocation": "bottom",
+  "clearInvisibleValues": "onComplete",
+  "pages": [
+    {
+      "name": "contact",
+      "title": "Contact",
+      "elements": [
+        {
+          "type": "text",
+          "name": "email",
+          "title": "Email address",
+          "inputType": "email",
+          "isRequired": true,
+          "autocomplete": "email",
+          "placeholder": "you@example.com"
+        },
+        {
+          "type": "text",
+          "name": "phone",
+          "title": "Phone",
+          "inputType": "tel",
+          "maskType": "pattern",
+          "maskSettings": {
+            "pattern": "+1 (999) 999-9999"
+          },
+          "placeholder": "+1 (___) ___-____"
+        }
+      ]
+    },
+    {
+      "name": "shipping",
+      "title": "Shipping",
+      "elements": [
+        {
+          "type": "panel",
+          "name": "shippingAddress",
+          "title": "Shipping address",
+          "elements": [
+            {
+              "type": "text",
+              "name": "fullName",
+              "title": "Full name",
+              "isRequired": true,
+              "autocomplete": "shipping name"
+            },
+            {
+              "type": "text",
+              "name": "address1",
+              "title": "Address line 1",
+              "isRequired": true,
+              "autocomplete": "shipping address-line1"
+            },
+            {
+              "type": "text",
+              "name": "address2",
+              "title": "Address line 2",
+              "autocomplete": "shipping address-line2"
+            },
+            {
+              "type": "text",
+              "name": "city",
+              "title": "City",
+              "isRequired": true,
+              "autocomplete": "shipping address-level2"
+            },
+            {
+              "type": "dropdown",
+              "name": "state",
+              "title": "State",
+              "startWithNewLine": false,
+              "choices": [
+                "CA",
+                "NY",
+                "TX",
+                "FL",
+                "IL",
+                "WA",
+                "MA",
+                "PA"
+              ],
+              "autocomplete": "shipping address-level1"
+            },
+            {
+              "type": "text",
+              "name": "zip",
+              "title": "ZIP code",
+              "isRequired": true,
+              "maskType": "pattern",
+              "maskSettings": {
+                "pattern": "99999"
+              },
+              "startWithNewLine": false,
+              "autocomplete": "shipping postal-code"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "shippingMethod",
+          "title": "Shipping method",
+          "isRequired": true,
+          "colCount": 1,
+          "defaultValue": "standard",
+          "choices": [
+            {
+              "value": "standard",
+              "text": "Standard (3–5 business days)"
+            },
+            {
+              "value": "express",
+              "text": "Express (2 business days) — $12"
+            },
+            {
+              "value": "overnight",
+              "text": "Overnight — $29"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "payment",
+      "title": "Payment",
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "billingSameAsShipping",
+          "title": "Billing address is the same as shipping",
+          "defaultValue": true
+        },
+        {
+          "type": "panel",
+          "name": "billingAddress",
+          "title": "Billing address",
+          "visibleIf": "{billingSameAsShipping} = false",
+          "elements": [
+            {
+              "type": "text",
+              "name": "billingFullName",
+              "title": "Full name",
+              "isRequired": true,
+              "autocomplete": "billing name"
+            },
+            {
+              "type": "text",
+              "name": "billingAddress1",
+              "title": "Address line 1",
+              "isRequired": true,
+              "autocomplete": "billing address-line1"
+            },
+            {
+              "type": "text",
+              "name": "billingAddress2",
+              "title": "Address line 2",
+              "autocomplete": "billing address-line2"
+            },
+            {
+              "type": "text",
+              "name": "billingCity",
+              "title": "City",
+              "isRequired": true,
+              "autocomplete": "billing address-level2"
+            },
+            {
+              "type": "dropdown",
+              "name": "billingState",
+              "title": "State",
+              "startWithNewLine": false,
+              "choices": [
+                "CA",
+                "NY",
+                "TX",
+                "FL",
+                "IL",
+                "WA",
+                "MA",
+                "PA"
+              ],
+              "autocomplete": "billing address-level1"
+            },
+            {
+              "type": "text",
+              "name": "billingZip",
+              "title": "ZIP code",
+              "isRequired": true,
+              "maskType": "pattern",
+              "maskSettings": {
+                "pattern": "99999"
+              },
+              "startWithNewLine": false,
+              "autocomplete": "billing postal-code"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "paymentMethod",
+          "title": "Payment method",
+          "isRequired": true,
+          "defaultValue": "card",
+          "choices": [
+            {
+              "value": "card",
+              "text": "Credit / debit card"
+            },
+            {
+              "value": "paypal",
+              "text": "PayPal"
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "cardPanel",
+          "title": "Card details",
+          "visibleIf": "{paymentMethod} = 'card'",
+          "elements": [
+            {
+              "type": "text",
+              "name": "cardNumber",
+              "title": "Card number",
+              "isRequired": true,
+              "maskType": "pattern",
+              "maskSettings": {
+                "pattern": "9999 9999 9999 9999"
+              },
+              "placeholder": "1234 5678 9012 3456"
+            },
+            {
+              "type": "text",
+              "name": "cardExpiry",
+              "title": "Expiry",
+              "isRequired": true,
+              "maskType": "pattern",
+              "maskSettings": {
+                "pattern": "99/99"
+              },
+              "placeholder": "MM/YY"
+            },
+            {
+              "type": "text",
+              "name": "cardCvc",
+              "title": "CVC",
+              "isRequired": true,
+              "startWithNewLine": false,
+              "maskType": "pattern",
+              "maskSettings": {
+                "pattern": "999"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "review",
+      "title": "Review",
+      "elements": [
+        {
+          "type": "expression",
+          "name": "reviewEmail",
+          "title": "Email",
+          "expression": "{email}"
+        },
+        {
+          "type": "expression",
+          "name": "reviewShipTo",
+          "title": "Ship to",
+          "expression": "iif({fullName} notempty, {fullName} + ', ' + {city}, '—')"
+        },
+        {
+          "type": "expression",
+          "name": "reviewBillTo",
+          "title": "Bill to",
+          "expression": "iif({billingSameAsShipping} = false and {billingAddress1} notempty, {billingAddress1} + ', ' + {billingCity}, 'Same as shipping')"
+        },
+        {
+          "type": "comment",
+          "name": "orderNotes",
+          "title": "Order notes (optional)",
+          "rows": 3
+        },
+        {
+          "type": "boolean",
+          "name": "acceptTerms",
+          "title": "I agree to the terms of sale",
+          "isRequired": true
+        }
+      ]
+    }
+  ],
+  "completedHtml": "<h4>Thanks! Your order has been placed.</h4>"
+}
