@@ -2,7 +2,7 @@
 
 SurveyJS in a shadcn/ui app — a themed multi-step form, ready to start from. MIT.
 
-A fresh `shadcn init` project (Next.js App Router, Tailwind 4, the `base-nova` style) with one addition: a multi-step checkout form rendered by [SurveyJS](https://surveyjs.io) from `survey.json`. The form takes its colors, radius and spacing from your shadcn tokens through the adapter stylesheet that ships in `survey-core`, and follows the light/dark toggle.
+A fresh `shadcn init` project (Next.js App Router, Tailwind 4, the `base-nova` style) with one addition: a multi-step checkout form — a cart with a dynamic matrix and computed totals, contact, shipping, payment, review — rendered by [SurveyJS](https://surveyjs.io) from `survey.json`. The form takes its colors, radius and spacing from your shadcn tokens through the adapter stylesheet that ships in `survey-core`, and follows the light/dark toggle.
 
 ## Quick start
 
@@ -44,6 +44,8 @@ import { SurveyForm } from "@/components/survey-form"
 
 <SurveyForm onComplete={(data) => console.log(data)} />
 ```
+
+Pass `prefillData` (answers keyed by question name, defined outside the component so it stays the same object) to add a "Prefill demo data" button that fills the current page; the starter page does this. Without it there is no button.
 
 Saving the response is yours to wire: the handler in `survey-form.tsx` marks the spot — see [SurveyJS backend integration](https://surveyjs.io/backend-integration).
 

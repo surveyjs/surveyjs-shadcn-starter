@@ -5,6 +5,12 @@ test("form renders, pages, re-themes and takes an edited definition", async ({
 }) => {
   await page.goto("/")
 
+  // Cart: the demo data fills the matrix, and the row expressions price it.
+  await expect(page.getByText("Items").first()).toBeVisible()
+  await page.getByRole("button", { name: "Prefill demo data" }).click()
+  await expect(page.getByText("$120.00").first()).toBeVisible()
+  await page.getByRole("button", { name: "Next" }).click()
+
   const email = page.getByRole("textbox", { name: "Email address" })
   await expect(email).toBeVisible()
   await email.fill("jane@example.com")

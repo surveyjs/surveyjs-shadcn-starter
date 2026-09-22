@@ -1,12 +1,83 @@
 {
   "title": "Checkout",
   "description": "Complete your order in a few quick steps.",
+  "headerView": "basic",
   "showTOC": true,
   "showQuestionNumbers": "off",
   "widthMode": "responsive",
   "questionErrorLocation": "bottom",
   "clearInvisibleValues": "onComplete",
   "pages": [
+    {
+      "name": "cart",
+      "title": "Cart",
+      "elements": [
+        {
+          "type": "matrixdynamic",
+          "name": "items",
+          "title": "Items",
+          "isRequired": true,
+          "minRowCount": 1,
+          "rowCount": 1,
+          "addRowText": "Add an item",
+          "removeRowText": "Remove",
+          "columns": [
+            {
+              "name": "product",
+              "title": "Product",
+              "cellType": "dropdown",
+              "isRequired": true,
+              "minWidth": "12rem",
+              "choices": [
+                {
+                  "value": "tee",
+                  "text": "Organic cotton tee — $28"
+                },
+                {
+                  "value": "hoodie",
+                  "text": "Heavyweight hoodie — $64"
+                },
+                {
+                  "value": "cap",
+                  "text": "Canvas cap — $22"
+                },
+                {
+                  "value": "tote",
+                  "text": "Tote bag — $18"
+                }
+              ]
+            },
+            {
+              "name": "quantity",
+              "title": "Qty",
+              "cellType": "text",
+              "inputType": "number",
+              "minWidth": "4.5rem",
+              "min": 1,
+              "max": 99,
+              "defaultValue": 1,
+              "isRequired": true
+            },
+            {
+              "name": "lineTotal",
+              "title": "Line total",
+              "cellType": "expression",
+              "expression": "{row.quantity} * iif({row.product} = 'tee', 28, iif({row.product} = 'hoodie', 64, iif({row.product} = 'cap', 22, iif({row.product} = 'tote', 18, 0))))",
+              "displayStyle": "currency",
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "type": "expression",
+          "name": "subtotal",
+          "title": "Subtotal",
+          "expression": "sumInArray({items}, 'lineTotal')",
+          "displayStyle": "currency",
+          "currency": "USD"
+        }
+      ]
+    },
     {
       "name": "contact",
       "title": "Contact",
@@ -110,7 +181,7 @@
           "choices": [
             {
               "value": "standard",
-              "text": "Standard (3–5 business days)"
+              "text": "Standard (3–5 business days) — Free"
             },
             {
               "value": "express",
@@ -279,6 +350,14 @@
           "name": "reviewBillTo",
           "title": "Bill to",
           "expression": "iif({billingSameAsShipping} = false and {billingAddress1} notempty, {billingAddress1} + ', ' + {billingCity}, 'Same as shipping')"
+        },
+        {
+          "type": "expression",
+          "name": "reviewTotal",
+          "title": "Order total",
+          "expression": "{subtotal} + iif({shippingMethod} = 'express', 12, iif({shippingMethod} = 'overnight', 29, 0))",
+          "displayStyle": "currency",
+          "currency": "USD"
         },
         {
           "type": "comment",
