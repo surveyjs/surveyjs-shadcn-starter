@@ -116,6 +116,13 @@
     --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* SurveyJS sizes the TOC for long page titles (256–336px); these are one word each,
+   so give the width back to the form. The mobile TOC is a dropdown and keeps its size. */
+.sv_progress-toc:not(.sv_progress-toc--mobile) {
+  min-width: 10rem;
+  max-width: 12rem;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
