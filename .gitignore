@@ -41,4 +41,3 @@ next-env.d.ts
 
 # shadcn registry build output
 /public/r
-package-lock.json
